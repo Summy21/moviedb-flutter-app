@@ -104,6 +104,7 @@ Representa el detalle completo de una película o serie.
 | tagline | String | Frase destacada |
 | runtime | int? | Duración en minutos (solo movies) |
 | numberOfSeasons | int? | Número de temporadas (solo tv) |
+| numberOfEpisodes | int? | Número de episodios totales (solo tv) |
 
 ---
 
