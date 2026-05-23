@@ -85,6 +85,18 @@ lib/
 - Flutter 3.41.9 or higher
 - Dart 3.11.5 or higher
 - Internet connection (TMDB API)
+- TMDB API Key — get yours free at [themoviedb.org](https://www.themoviedb.org/settings/api)
+
+### Environment Setup
+
+1. Create a `.env` file in the project root:
+
+```
+TMDB_API_KEY=your_api_key_here
+```
+
+2. This file is excluded from version control for security.
+   Never commit your API key to the repository.
 
 ### Steps
 
@@ -110,7 +122,13 @@ flutter pub run build_runner build --delete-conflicting-outputs
 **4. Run the app**
 
 ```bash
-flutter run
+flutter run --dart-define=TMDB_API_KEY=your_api_key_here
+```
+
+Or using the provided script:
+
+```bash
+./run.sh
 ```
 
 ## Tests
