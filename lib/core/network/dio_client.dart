@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:moviedb_flutter_app/core/constants/api_constants.dart';
 
 /// Configured Dio HTTP client for TMDB API communication.
@@ -33,7 +34,7 @@ class DioClient {
         requestBody: false,
         responseBody: false,
         // Use print for simplicity — replace with a logger in production.
-        logPrint: (log) => print(log),
+        logPrint: (log) => debugPrint(log.toString()),
       ),
     );
   }
