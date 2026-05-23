@@ -1,5 +1,10 @@
 import 'package:moviedb_flutter_app/features/media/domain/entities/tv_show.dart';
 
+/// Data Transfer Object for a TV show from the TMDB API.
+///
+/// Structurally similar to [MovieModel] but maps different
+/// TMDB field names — TV shows use "name" instead of "title"
+/// and "first_air_date" instead of "release_date".
 class TvShowModel {
   const TvShowModel({
     required this.id,
@@ -23,6 +28,7 @@ class TvShowModel {
   final String firstAirDate;
   final List<int> genreIds;
 
+  /// Deserializes a TMDB TV show JSON object into a [TvShowModel].
   factory TvShowModel.fromJson(Map<String, dynamic> json) {
     return TvShowModel(
       id: json['id'] as int,
@@ -40,6 +46,7 @@ class TvShowModel {
     );
   }
 
+  /// Converts this model to the domain entity [TvShow].
   TvShow toEntity() {
     return TvShow(
       id: id,

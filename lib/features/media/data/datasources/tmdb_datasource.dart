@@ -6,6 +6,12 @@ import 'package:moviedb_flutter_app/features/media/data/models/media_detail_mode
 import 'package:moviedb_flutter_app/features/media/data/models/movie_model.dart';
 import 'package:moviedb_flutter_app/features/media/data/models/tv_show_model.dart';
 
+/// Concrete implementation of [IMediaDataSource] that communicates
+/// directly with the TMDB REST API using Dio.
+///
+/// Throws [ServerException] on any network or API error.
+/// Never returns [Either] — that responsibility belongs to
+/// [MediaRepositoryImpl].
 class TmdbDataSource implements IMediaDataSource {
   const TmdbDataSource(this._dio);
 
@@ -144,7 +150,10 @@ class TmdbDataSource implements IMediaDataSource {
   }
 
   // ── Error handling ────────────────────────────────────────────────────────
-
+  /// Converts a [DioException] into a human-readable error message.
+  ///
+  /// Handles timeout, bad response, and connection errors explicitly.
+  /// Falls back to the raw Dio message for unexpected cases.
   String _handleDioError(DioException e) {
     switch (e.type) {
       case DioExceptionType.connectionTimeout:

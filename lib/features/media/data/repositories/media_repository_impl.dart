@@ -7,6 +7,13 @@ import 'package:moviedb_flutter_app/features/media/domain/entities/movie.dart';
 import 'package:moviedb_flutter_app/features/media/domain/entities/tv_show.dart';
 import 'package:moviedb_flutter_app/features/media/domain/repositories/i_media_repository.dart';
 
+/// Implementation of [IMediaRepository].
+///
+/// Bridges the data and domain layers:
+/// - Calls [IMediaDataSource] to fetch raw models
+/// - Converts models to domain entities via [toEntity()]
+/// - Catches [ServerException] and converts to [ServerFailure]
+/// - Returns [Either] so the caller handles both cases explicitly
 class MediaRepositoryImpl implements IMediaRepository {
   const MediaRepositoryImpl(this._dataSource);
 

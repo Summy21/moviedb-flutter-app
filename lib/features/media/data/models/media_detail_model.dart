@@ -1,5 +1,14 @@
 import 'package:moviedb_flutter_app/features/media/domain/entities/media_detail.dart';
 
+/// Data Transfer Object for full movie or TV show detail from TMDB.
+///
+/// Has two factory constructors because TMDB returns different
+/// JSON structures for movies and TV shows:
+/// - Movies use "title" and "release_date"
+/// - TV shows use "name" and "first_air_date"
+///
+/// Both produce the same [MediaDetail] entity via [toEntity],
+/// keeping the domain layer agnostic of these API differences.
 class MediaDetailModel {
   const MediaDetailModel({
     required this.id,
@@ -33,7 +42,11 @@ class MediaDetailModel {
   final int? numberOfSeasons;
   final int? numberOfEpisodes;
 
-  // Para películas — usa "title" y "release_date"
+  /// Deserializes a TMDB movie detail JSON response.
+  ///
+  /// Extracts genre names from the nested genres array.
+  /// Sets [numberOfSeasons] and [numberOfEpisodes] to null
+  /// since movies do not have these fields.
   factory MediaDetailModel.fromMovieJson(Map<String, dynamic> json) {
     return MediaDetailModel(
       id: json['id'] as int,
@@ -56,7 +69,11 @@ class MediaDetailModel {
     );
   }
 
-  // Para series — usa "name" y "first_air_date"
+  /// Deserializes a TMDB TV show detail JSON response.
+  ///
+  /// Maps "name" to title and "first_air_date" to releaseDate
+  /// so both movie and TV show details share the same entity structure.
+  /// Sets [runtime] to null since TV shows use episode-level runtimes.
   factory MediaDetailModel.fromTvJson(Map<String, dynamic> json) {
     return MediaDetailModel(
       id: json['id'] as int,
@@ -79,6 +96,7 @@ class MediaDetailModel {
     );
   }
 
+  /// Converts this model to the domain entity [MediaDetail].
   MediaDetail toEntity() {
     return MediaDetail(
       id: id,
