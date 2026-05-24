@@ -390,9 +390,9 @@ class _MediaListItem extends StatelessWidget {
                       ? CachedNetworkImage(
                           imageUrl: ApiConstants.imageUrl(posterPath),
                           fit: BoxFit.cover,
-                          placeholder: (_, __) =>
+                          placeholder: (context, url) =>
                               const ColoredBox(color: Color(0xFF0F3460)),
-                          errorWidget: (_, __, ___) =>
+                          errorWidget: (context, url, error) =>
                               const ColoredBox(color: Color(0xFF0F3460)),
                         )
                       : const ColoredBox(
