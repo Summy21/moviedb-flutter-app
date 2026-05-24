@@ -48,6 +48,10 @@ class ApiConstants {
   /// mixed results of movies, TV shows, and people.
   static const String searchMulti = '/search/multi';
 
+  static const String searchMovies = '/search/movie';
+  
+  static const String searchTvShows = '/search/tv';
+
   // ── URL Helpers ───────────────────────────────────────────────────────────
 
   /// Builds a full poster image URL from a TMDB [path].

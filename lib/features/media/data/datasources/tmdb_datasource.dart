@@ -66,14 +66,13 @@ class TmdbDataSource implements IMediaDataSource {
   @override
   Future<List<MovieModel>> searchMovies(String query) async {
     try {
+      // Use dedicated movie search for better accuracy
       final response = await _dio.get(
-        ApiConstants.searchMulti,
+        ApiConstants.searchMovies,
         queryParameters: {'query': query},
       );
       final List<dynamic> results = response.data['results'];
-      // Filter only movies from multi search results
       return results
-          .where((json) => json['media_type'] == 'movie')
           .map((json) => MovieModel.fromJson(json as Map<String, dynamic>))
           .toList();
     } on DioException catch (e) {
@@ -131,21 +130,19 @@ class TmdbDataSource implements IMediaDataSource {
 
   @override
   Future<List<TvShowModel>> searchTvShows(String query) async {
-    try {
-      final response = await _dio.get(
-        ApiConstants.searchMulti,
+      try {
+      // Use dedicated tv search for better accuracy
+      final response = await _dio.get(ApiConstants.searchTvShows,
         queryParameters: {'query': query},
       );
       final List<dynamic> results = response.data['results'];
-      // Filter only tv shows from multi search results
       return results
-          .where((json) => json['media_type'] == 'tv')
           .map((json) => TvShowModel.fromJson(json as Map<String, dynamic>))
           .toList();
-    } on DioException catch (e) {
-      throw ServerException(_handleDioError(e));
-    } catch (e) {
-      throw ServerException(e.toString());
+      } on DioException catch (e) {
+        throw ServerException(_handleDioError(e));
+      } catch (e) {
+        throw ServerException(e.toString());
     }
   }
 
