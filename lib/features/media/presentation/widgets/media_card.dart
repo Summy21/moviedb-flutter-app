@@ -45,12 +45,11 @@ class MediaCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Poster with rating badge
-            ClipRRect(
-              borderRadius: const BorderRadius.vertical(
-                top: Radius.circular(10),
-              ),
-              child: AspectRatio(
-                aspectRatio: 2 / 3,
+            Expanded(
+              child: ClipRRect(
+                borderRadius: const BorderRadius.vertical(
+                  top: Radius.circular(10),
+                ),
                 child: Stack(
                   fit: StackFit.expand,
                   children: [
@@ -83,6 +82,7 @@ class MediaCard extends StatelessWidget {
               padding: const EdgeInsets.all(8),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
                     title,
