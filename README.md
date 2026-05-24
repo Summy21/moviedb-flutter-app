@@ -7,6 +7,13 @@ and Spec-Driven Development methodology.
 
 ---
 
+## CI/CD Status
+
+[![CI](https://github.com/Summy21/moviedb-flutter-app/actions/workflows/ci.yaml/badge.svg)](https://github.com/Summy21/moviedb-flutter-app/actions/workflows/ci.yaml)
+
+
+---
+
 ## Tech Stack
 
 | Technology | Purpose |
@@ -159,32 +166,84 @@ flutter test --coverage
 
 ## Features Implemented
 
-- [ ] Popular movies list
-- [ ] Top rated movies list
-- [ ] Popular TV shows list
-- [ ] Top rated TV shows list
-- [ ] Movie detail view
-- [ ] TV show detail view
-- [ ] Search by name
-- [ ] Animations and transitions
-- [ ] Unit tests
-
-*(Updated as development progresses)*
+- [x] Popular movies list
+- [x] Top rated movies list
+- [x] Popular TV shows list
+- [x] Top rated TV shows list
+- [x] Movie detail view with backdrop and Hero animation
+- [x] TV show detail view
+- [x] Search by name with debounce
+- [x] Hero animations between list and detail
+- [x] Unit tests — models and Cubits
+- [x] CI/CD pipeline with GitHub Actions
 
 ---
 
+## CI/CD
+
+GitHub Actions pipeline runs automatically on every push to main:
+
+| Step | Purpose |
+|---|---|
+| dart format | Enforces consistent code style |
+| flutter analyze | Static analysis and type checking |
+| flutter test | Unit tests with coverage report |
+| flutter build apk | Verifies Android compilation |
+
+Developer pushes to main
+
+↓
+GitHub Actions triggers pipeline
+
+↓
+Format → Analyze → Test → Build
+
+↓
+
+✅ Green — code is safe to merge
+
+❌ Red — developer gets notified immediately
+
+
 ## Pending Features
 
-*(Completed at delivery)*
+**Pagination**
+TMDB returns paginated results (page parameter).
+I would implement infinite scroll using a ScrollController
+that triggers fetchNextPage() when reaching 80% of the list,
+adding a page counter to each Cubit.
 
-Any feature not fully implemented will be described here,
-including how it would be approached with more time.
+**Local caching**
+I would add a local datasource using Hive or sqflite
+to cache the first page of results, allowing offline
+browsing of previously loaded content. The repository
+would implement a cache-first strategy.
+
+**App icon and splash screen**
+I would use flutter_launcher_icons and flutter_native_splash
+packages to configure a custom icon and splash screen
+matching the dark theme of the app.
+
+**Golden tests**
+Screenshot-based UI tests comparing rendered widgets
+against baseline images using the golden_toolkit package.
+
+**iOS CocoaPods sync**
+Pod installation configuration pending for iOS simulator.
+The app is fully functional on Android and Web.
+
+**CD pipeline — store publishing**
+With more time I would add Fastlane integration
+to automate signing and publishing to Google Play
+and App Store from the CI pipeline.
 
 ---
 
 ## Screenshots
 
-*(Added at delivery)*
+| Home — Películas | Home — Series | Detalle |
+|---|---|---|
+| ![Home Movies](docs/screenshots/home_movies.png) | ![Home Series](docs/screenshots/home_series.png) | ![Detail](docs/screenshots/detail.png) |
 
 ---
 
@@ -250,6 +309,7 @@ applications in production banking environments.
 | dartz Either | Exceptions | Forces explicit error handling at compile time |
 | go_router | Navigator 2.0 | Declarative, cleaner named routes |
 | cached_network_image | Image.network | Caching, placeholders, error widgets |
+
 
 ---
 

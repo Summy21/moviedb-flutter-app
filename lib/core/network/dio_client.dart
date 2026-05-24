@@ -25,15 +25,15 @@ class DioClient {
     );
 
     if (kDebugMode) {
-  _dio.interceptors.add(
-    InterceptorsWrapper(
+      _dio.interceptors.add(
+        InterceptorsWrapper(
           onError: (error, handler) {
             debugPrint('[DioError] ${error.type}: ${error.message}');
             handler.next(error);
           },
         ),
-  );
-}
+      );
+    }
   }
 
   late final Dio _dio;
