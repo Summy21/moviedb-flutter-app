@@ -10,6 +10,7 @@ import 'package:moviedb_flutter_app/features/media/presentation/cubit/detail_cub
 import 'package:moviedb_flutter_app/features/media/presentation/cubit/detail_state.dart';
 
 class MockGetMovieDetail extends Mock implements GetMovieDetail {}
+
 class MockGetTvShowDetail extends Mock implements GetTvShowDetail {}
 
 void main() {
@@ -53,30 +54,25 @@ void main() {
     blocTest<DetailCubit, DetailState>(
       'emits [loading, loaded] when movie detail fetch succeeds',
       build: () {
-        when(() => mockGetMovieDetail(any()))
-            .thenAnswer((_) async => Right(tDetail));
+        when(
+          () => mockGetMovieDetail(any()),
+        ).thenAnswer((_) async => Right(tDetail));
         return cubit;
       },
       act: (cubit) => cubit.fetchMovieDetail(550),
-      expect: () => [
-        const DetailLoading(),
-        DetailLoaded(tDetail),
-      ],
+      expect: () => [const DetailLoading(), DetailLoaded(tDetail)],
     );
 
     blocTest<DetailCubit, DetailState>(
       'emits [loading, error] when movie detail fetch fails',
       build: () {
-        when(() => mockGetMovieDetail(any()))
-            .thenAnswer((_) async =>
-                const Left(ServerFailure('Not found')));
+        when(
+          () => mockGetMovieDetail(any()),
+        ).thenAnswer((_) async => const Left(ServerFailure('Not found')));
         return cubit;
       },
       act: (cubit) => cubit.fetchMovieDetail(550),
-      expect: () => [
-        const DetailLoading(),
-        const DetailError('Not found'),
-      ],
+      expect: () => [const DetailLoading(), const DetailError('Not found')],
     );
   });
 
@@ -84,15 +80,13 @@ void main() {
     blocTest<DetailCubit, DetailState>(
       'emits [loading, loaded] when TV show detail fetch succeeds',
       build: () {
-        when(() => mockGetTvShowDetail(any()))
-            .thenAnswer((_) async => Right(tDetail));
+        when(
+          () => mockGetTvShowDetail(any()),
+        ).thenAnswer((_) async => Right(tDetail));
         return cubit;
       },
       act: (cubit) => cubit.fetchTvShowDetail(1396),
-      expect: () => [
-        const DetailLoading(),
-        DetailLoaded(tDetail),
-      ],
+      expect: () => [const DetailLoading(), DetailLoaded(tDetail)],
     );
   });
 }

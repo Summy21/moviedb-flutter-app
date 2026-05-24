@@ -12,9 +12,9 @@ class DetailCubit extends Cubit<DetailState> {
   DetailCubit({
     required GetMovieDetail getMovieDetail,
     required GetTvShowDetail getTvShowDetail,
-  })  : _getMovieDetail = getMovieDetail,
-        _getTvShowDetail = getTvShowDetail,
-        super(const DetailState.initial());
+  }) : _getMovieDetail = getMovieDetail,
+       _getTvShowDetail = getTvShowDetail,
+       super(const DetailState.initial());
 
   final GetMovieDetail _getMovieDetail;
   final GetTvShowDetail _getTvShowDetail;

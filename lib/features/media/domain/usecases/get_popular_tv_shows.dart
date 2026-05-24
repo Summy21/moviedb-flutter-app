@@ -9,7 +9,7 @@ import 'package:moviedb_flutter_app/features/media/domain/repositories/i_media_r
 /// Delegates directly to [IMediaRepository.getPopularTvShows].
 class GetPopularTvShows implements Usecase<List<TvShow>, NoParams> {
   const GetPopularTvShows(this._repository);
-  
+
   final IMediaRepository _repository;
 
   @override

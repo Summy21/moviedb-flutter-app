@@ -39,7 +39,8 @@ class TvShowModel {
       voteAverage: (json['vote_average'] as num).toDouble(),
       voteCount: json['vote_count'] as int? ?? 0,
       firstAirDate: json['first_air_date'] as String? ?? '',
-      genreIds: (json['genre_ids'] as List<dynamic>?)
+      genreIds:
+          (json['genre_ids'] as List<dynamic>?)
               ?.map((e) => e as int)
               .toList() ??
           [],

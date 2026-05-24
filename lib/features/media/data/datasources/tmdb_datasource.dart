@@ -118,9 +118,7 @@ class TmdbDataSource implements IMediaDataSource {
   Future<MediaDetailModel> getTvShowDetail(int id) async {
     try {
       final response = await _dio.get('${ApiConstants.tvShowDetail}/$id');
-      return MediaDetailModel.fromTvJson(
-        response.data as Map<String, dynamic>,
-      );
+      return MediaDetailModel.fromTvJson(response.data as Map<String, dynamic>);
     } on DioException catch (e) {
       throw ServerException(_handleDioError(e));
     } catch (e) {
@@ -130,19 +128,20 @@ class TmdbDataSource implements IMediaDataSource {
 
   @override
   Future<List<TvShowModel>> searchTvShows(String query) async {
-      try {
+    try {
       // Use dedicated tv search for better accuracy
-      final response = await _dio.get(ApiConstants.searchTvShows,
+      final response = await _dio.get(
+        ApiConstants.searchTvShows,
         queryParameters: {'query': query},
       );
       final List<dynamic> results = response.data['results'];
       return results
           .map((json) => TvShowModel.fromJson(json as Map<String, dynamic>))
           .toList();
-      } on DioException catch (e) {
-        throw ServerException(_handleDioError(e));
-      } catch (e) {
-        throw ServerException(e.toString());
+    } on DioException catch (e) {
+      throw ServerException(_handleDioError(e));
+    } catch (e) {
+      throw ServerException(e.toString());
     }
   }
 

@@ -15,11 +15,7 @@ import 'package:moviedb_flutter_app/injection_container.dart';
 /// Uses Hero animation on the poster to create a smooth
 /// transition from the card in the grid.
 class DetailPage extends StatelessWidget {
-  const DetailPage({
-    super.key,
-    required this.id,
-    required this.isMovie,
-  });
+  const DetailPage({super.key, required this.id, required this.isMovie});
   final int id;
   final bool isMovie;
 
@@ -41,10 +37,7 @@ class DetailPage extends StatelessWidget {
 }
 
 class _DetailContent extends StatelessWidget {
-  const _DetailContent({
-    required this.id,
-    required this.isMovie,
-  });
+  const _DetailContent({required this.id, required this.isMovie});
 
   final int id;
   final bool isMovie;
@@ -60,10 +53,7 @@ class _DetailContent extends StatelessWidget {
             loading: () => const Center(
               child: CircularProgressIndicator(color: Color(0xFFE50914)),
             ),
-            loaded: (detail) => _DetailBody(
-              detail: detail,
-              isMovie: isMovie,
-            ),
+            loaded: (detail) => _DetailBody(detail: detail, isMovie: isMovie),
             error: (message) => Scaffold(
               backgroundColor: const Color(0xFF1A1A2E),
               appBar: AppBar(backgroundColor: const Color(0xFF1A1A2E)),
@@ -91,17 +81,13 @@ class _DetailContent extends StatelessWidget {
 /// 5. Overview text
 /// 6. Tagline accent box
 class _DetailBody extends StatelessWidget {
-  const _DetailBody({
-    required this.detail,
-    required this.isMovie,
-  });
+  const _DetailBody({required this.detail, required this.isMovie});
 
   final MediaDetail detail;
   final bool isMovie;
 
   /// Hero tag must match the one used in [MediaCard].
-  String get _heroTag =>
-      isMovie ? 'movie_${detail.id}' : 'tv_${detail.id}';
+  String get _heroTag => isMovie ? 'movie_${detail.id}' : 'tv_${detail.id}';
 
   @override
   Widget build(BuildContext context) {
@@ -113,8 +99,10 @@ class _DetailBody extends StatelessWidget {
           pinned: true,
           backgroundColor: const Color(0xFF1A1A2E),
           leading: IconButton(
-            icon: const Icon(Icons.arrow_back_ios_new_rounded,
-                color: Colors.white),
+            icon: const Icon(
+              Icons.arrow_back_ios_new_rounded,
+              color: Colors.white,
+            ),
             onPressed: () => Navigator.of(context).pop(),
           ),
           flexibleSpace: FlexibleSpaceBar(
@@ -142,14 +130,18 @@ class _DetailBody extends StatelessWidget {
                           height: 135,
                           child: detail.posterPath != null
                               ? CachedNetworkImage(
-                                  imageUrl:
-                                      ApiConstants.imageUrl(detail.posterPath),
+                                  imageUrl: ApiConstants.imageUrl(
+                                    detail.posterPath,
+                                  ),
                                   fit: BoxFit.cover,
                                 )
                               : Container(
                                   color: const Color(0xFF0F3460),
-                                  child: const Icon(Icons.movie_outlined,
-                                      color: Colors.white24, size: 32),
+                                  child: const Icon(
+                                    Icons.movie_outlined,
+                                    color: Colors.white24,
+                                    size: 32,
+                                  ),
                                 ),
                         ),
                       ),
@@ -244,7 +236,9 @@ class _DetailBody extends StatelessWidget {
                   padding: const EdgeInsets.fromLTRB(16, 0, 16, 32),
                   child: Container(
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 14, vertical: 10),
+                      horizontal: 14,
+                      vertical: 10,
+                    ),
                     decoration: BoxDecoration(
                       color: const Color(0xFFE50914).withValues(alpha: 0.1),
                       borderRadius: BorderRadius.circular(8),
@@ -274,8 +268,7 @@ class _DetailBody extends StatelessWidget {
   /// Builds the subtitle line below the title.
   /// Format: "Genre1 · Genre2 · Year"
   String get _subtitle {
-    final year = detail.releaseDate.isNotEmpty &&
-            detail.releaseDate.length >= 4
+    final year = detail.releaseDate.isNotEmpty && detail.releaseDate.length >= 4
         ? detail.releaseDate.substring(0, 4)
         : '';
     return year;
@@ -298,12 +291,10 @@ class _Backdrop extends StatelessWidget {
             ? CachedNetworkImage(
                 imageUrl: ApiConstants.backdropUrl(backdropPath),
                 fit: BoxFit.cover,
-                placeholder: (context, url) => const ColoredBox(
-                  color: Color(0xFF0F3460),
-                ),
-                errorWidget: (context, url, error) => const ColoredBox(
-                  color: Color(0xFF0F3460),
-                ),
+                placeholder: (context, url) =>
+                    const ColoredBox(color: Color(0xFF0F3460)),
+                errorWidget: (context, url, error) =>
+                    const ColoredBox(color: Color(0xFF0F3460)),
               )
             : const ColoredBox(color: Color(0xFF0F3460)),
 
@@ -329,10 +320,7 @@ class _Backdrop extends StatelessWidget {
 
 /// Horizontal stats row showing rating, duration/seasons, and status.
 class _StatsRow extends StatelessWidget {
-  const _StatsRow({
-    required this.detail,
-    required this.isMovie,
-  });
+  const _StatsRow({required this.detail, required this.isMovie});
 
   final MediaDetail detail;
   final bool isMovie;
@@ -359,11 +347,11 @@ class _StatsRow extends StatelessWidget {
             _StatItem(
               value: isMovie
                   ? detail.runtime != null
-                      ? '${detail.runtime} min'
-                      : 'N/A'
+                        ? '${detail.runtime} min'
+                        : 'N/A'
                   : detail.numberOfSeasons != null
-                      ? '${detail.numberOfSeasons} temp.'
-                      : 'N/A',
+                  ? '${detail.numberOfSeasons} temp.'
+                  : 'N/A',
               label: isMovie ? 'Duración' : 'Temporadas',
               icon: isMovie ? Icons.access_time_rounded : Icons.tv_rounded,
             ),
@@ -423,10 +411,7 @@ class _Divider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 0.5,
-      color: Colors.white.withValues(alpha: 0.15),
-    );
+    return Container(width: 0.5, color: Colors.white.withValues(alpha: 0.15));
   }
 }
 
@@ -443,16 +428,11 @@ class _GenreChip extends StatelessWidget {
       decoration: BoxDecoration(
         color: const Color(0xFF16213E),
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(
-          color: Colors.white.withValues(alpha: 0.15),
-        ),
+        border: Border.all(color: Colors.white.withValues(alpha: 0.15)),
       ),
       child: Text(
         genre,
-        style: const TextStyle(
-          color: Colors.white70,
-          fontSize: 12,
-        ),
+        style: const TextStyle(color: Colors.white70, fontSize: 12),
       ),
     );
   }

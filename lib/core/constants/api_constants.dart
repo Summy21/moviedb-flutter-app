@@ -49,7 +49,7 @@ class ApiConstants {
   static const String searchMulti = '/search/multi';
 
   static const String searchMovies = '/search/movie';
-  
+
   static const String searchTvShows = '/search/tv';
 
   // ── URL Helpers ───────────────────────────────────────────────────────────

@@ -56,7 +56,8 @@ class MediaDetailModel {
       backdropPath: json['backdrop_path'] as String?,
       voteAverage: (json['vote_average'] as num).toDouble(),
       voteCount: json['vote_count'] as int? ?? 0,
-      genres: (json['genres'] as List<dynamic>?)
+      genres:
+          (json['genres'] as List<dynamic>?)
               ?.map((e) => e['name'] as String)
               .toList() ??
           [],
@@ -83,7 +84,8 @@ class MediaDetailModel {
       backdropPath: json['backdrop_path'] as String?,
       voteAverage: (json['vote_average'] as num).toDouble(),
       voteCount: json['vote_count'] as int? ?? 0,
-      genres: (json['genres'] as List<dynamic>?)
+      genres:
+          (json['genres'] as List<dynamic>?)
               ?.map((e) => e['name'] as String)
               .toList() ??
           [],

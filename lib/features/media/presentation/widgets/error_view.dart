@@ -5,11 +5,7 @@ import 'package:flutter/material.dart';
 /// Used in all three states where a fetch can fail —
 /// movies, TV shows, and detail screens.
 class ErrorView extends StatelessWidget {
-  const ErrorView({
-    super.key,
-    required this.message,
-    required this.onRetry,
-  });
+  const ErrorView({super.key, required this.message, required this.onRetry});
 
   final String message;
   final VoidCallback onRetry;
@@ -22,11 +18,7 @@ class ErrorView extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Icon(
-              Icons.wifi_off_rounded,
-              color: Colors.white38,
-              size: 48,
-            ),
+            const Icon(Icons.wifi_off_rounded, color: Colors.white38, size: 48),
             const SizedBox(height: 16),
             Text(
               message,

@@ -13,9 +13,9 @@ class MoviesCubit extends Cubit<MoviesState> {
   MoviesCubit({
     required GetPopularMovies getPopularMovies,
     required GetTopRatedMovies getTopRatedMovies,
-  })  : _getPopularMovies = getPopularMovies,
-        _getTopRatedMovies = getTopRatedMovies,
-        super(const MoviesState.initial());
+  }) : _getPopularMovies = getPopularMovies,
+       _getTopRatedMovies = getTopRatedMovies,
+       super(const MoviesState.initial());
 
   final GetPopularMovies _getPopularMovies;
   final GetTopRatedMovies _getTopRatedMovies;

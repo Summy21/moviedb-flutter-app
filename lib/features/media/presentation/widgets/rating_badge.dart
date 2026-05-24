@@ -5,10 +5,7 @@ import 'package:flutter/material.dart';
 /// Shows a semi-transparent dark background with a gold star
 /// and the vote average formatted to one decimal place.
 class RatingBadge extends StatelessWidget {
-  const RatingBadge({
-    super.key,
-    required this.voteAverage,
-  });
+  const RatingBadge({super.key, required this.voteAverage});
 
   final double voteAverage;
 

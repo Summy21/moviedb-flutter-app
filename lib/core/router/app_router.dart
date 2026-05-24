@@ -19,12 +19,10 @@ class AppRouter {
   static final GoRouter router = GoRouter(
     initialLocation: home,
     routes: [
-      GoRoute(
-        path: home,
-        builder: (context, state) => const HomePage(),
-      ),
+      GoRoute(path: home, builder: (context, state) => const HomePage()),
       GoRoute(
         path: detail,
+
         /// Expects a [MediaDetail] object passed via extra.
         /// The detail page uses this to display content immediately
         /// while fetching full detail from the API.
@@ -36,10 +34,7 @@ class AppRouter {
           );
         },
       ),
-      GoRoute(
-        path: search,
-        builder: (context, state) => const SearchPage(),
-      ),
+      GoRoute(path: search, builder: (context, state) => const SearchPage()),
     ],
   );
 }

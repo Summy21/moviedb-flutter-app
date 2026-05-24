@@ -45,17 +45,13 @@ Future<void> initDependencies() async {
 
   /// Registered against the interface so the repository
   /// depends on the abstraction, not the concrete class.
-  sl.registerLazySingleton<IMediaDataSource>(
-    () => TmdbDataSource(sl()),
-  );
+  sl.registerLazySingleton<IMediaDataSource>(() => TmdbDataSource(sl()));
 
   // ── 3. Repositories ───────────────────────────────────────────────────────
 
   /// Registered against [IMediaRepository] — domain never
   /// knows that [MediaRepositoryImpl] exists.
-  sl.registerLazySingleton<IMediaRepository>(
-    () => MediaRepositoryImpl(sl()),
-  );
+  sl.registerLazySingleton<IMediaRepository>(() => MediaRepositoryImpl(sl()));
 
   // ── 4. Use cases ──────────────────────────────────────────────────────────
 
@@ -78,30 +74,18 @@ Future<void> initDependencies() async {
   /// Registered as factory — each screen gets a fresh Cubit instance.
   /// This prevents state from leaking between screen navigations.
   sl.registerFactory(
-    () => MoviesCubit(
-      getPopularMovies: sl(),
-      getTopRatedMovies: sl(),
-    ),
+    () => MoviesCubit(getPopularMovies: sl(), getTopRatedMovies: sl()),
   );
 
   sl.registerFactory(
-    () => TvShowsCubit(
-      getPopularTvShows: sl(),
-      getTopRatedTvShows: sl(),
-    ),
+    () => TvShowsCubit(getPopularTvShows: sl(), getTopRatedTvShows: sl()),
   );
 
   sl.registerFactory(
-    () => DetailCubit(
-      getMovieDetail: sl(),
-      getTvShowDetail: sl(),
-    ),
+    () => DetailCubit(getMovieDetail: sl(), getTvShowDetail: sl()),
   );
 
   sl.registerFactory(
-    () => SearchCubit(
-      searchMovies: sl(),
-      searchTvShows: sl(),
-    ),
+    () => SearchCubit(searchMovies: sl(), searchTvShows: sl()),
   );
 }

@@ -12,6 +12,7 @@ import 'package:moviedb_flutter_app/features/media/presentation/cubit/movies_sta
 
 // Mocks
 class MockGetPopularMovies extends Mock implements GetPopularMovies {}
+
 class MockGetTopRatedMovies extends Mock implements GetTopRatedMovies {}
 
 void main() {
@@ -52,8 +53,9 @@ void main() {
     blocTest<MoviesCubit, MoviesState>(
       'emits [loading, loaded] when use case succeeds',
       build: () {
-        when(() => mockGetPopularMovies(any()))
-            .thenAnswer((_) async => Right([tMovie]));
+        when(
+          () => mockGetPopularMovies(any()),
+        ).thenAnswer((_) async => Right([tMovie]));
         return cubit;
       },
       act: (cubit) => cubit.fetchPopularMovies(),
@@ -66,9 +68,9 @@ void main() {
     blocTest<MoviesCubit, MoviesState>(
       'emits [loading, error] when use case fails',
       build: () {
-        when(() => mockGetPopularMovies(any()))
-            .thenAnswer((_) async =>
-                const Left(ServerFailure('Connection error')));
+        when(() => mockGetPopularMovies(any())).thenAnswer(
+          (_) async => const Left(ServerFailure('Connection error')),
+        );
         return cubit;
       },
       act: (cubit) => cubit.fetchPopularMovies(),
@@ -81,15 +83,13 @@ void main() {
     blocTest<MoviesCubit, MoviesState>(
       'emits [loading, loaded] with empty list when no movies found',
       build: () {
-        when(() => mockGetPopularMovies(any()))
-            .thenAnswer((_) async => const Right([]));
+        when(
+          () => mockGetPopularMovies(any()),
+        ).thenAnswer((_) async => const Right([]));
         return cubit;
       },
       act: (cubit) => cubit.fetchPopularMovies(),
-      expect: () => [
-        const MoviesLoading(),
-        const MoviesLoaded([]),
-      ],
+      expect: () => [const MoviesLoading(), const MoviesLoaded([])],
     );
   });
 
@@ -97,8 +97,9 @@ void main() {
     blocTest<MoviesCubit, MoviesState>(
       'emits [loading, loaded] when use case succeeds',
       build: () {
-        when(() => mockGetTopRatedMovies(any()))
-            .thenAnswer((_) async => Right([tMovie]));
+        when(
+          () => mockGetTopRatedMovies(any()),
+        ).thenAnswer((_) async => Right([tMovie]));
         return cubit;
       },
       act: (cubit) => cubit.fetchTopRatedMovies(),
@@ -111,16 +112,13 @@ void main() {
     blocTest<MoviesCubit, MoviesState>(
       'emits [loading, error] when use case fails',
       build: () {
-        when(() => mockGetTopRatedMovies(any()))
-            .thenAnswer((_) async =>
-                const Left(ServerFailure('Server error')));
+        when(
+          () => mockGetTopRatedMovies(any()),
+        ).thenAnswer((_) async => const Left(ServerFailure('Server error')));
         return cubit;
       },
       act: (cubit) => cubit.fetchTopRatedMovies(),
-      expect: () => [
-        const MoviesLoading(),
-        const MoviesError('Server error'),
-      ],
+      expect: () => [const MoviesLoading(), const MoviesError('Server error')],
     );
   });
 }

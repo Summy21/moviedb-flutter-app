@@ -70,8 +70,10 @@ class _SearchContentState extends State<_SearchContent> {
         backgroundColor: const Color(0xFF1A1A2E),
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new_rounded,
-              color: Colors.white),
+          icon: const Icon(
+            Icons.arrow_back_ios_new_rounded,
+            color: Colors.white,
+          ),
           onPressed: () => Navigator.of(context).pop(),
         ),
         title: const Text(
@@ -88,9 +90,7 @@ class _SearchContentState extends State<_SearchContent> {
               decoration: BoxDecoration(
                 color: const Color(0xFF16213E),
                 borderRadius: BorderRadius.circular(12),
-                border: Border.all(
-                  color: Colors.white.withValues(alpha: 0.1),
-                ),
+                border: Border.all(color: Colors.white.withValues(alpha: 0.1)),
               ),
               child: TextField(
                 controller: _controller,
@@ -103,15 +103,21 @@ class _SearchContentState extends State<_SearchContent> {
                     color: Colors.white.withValues(alpha: 0.3),
                     fontSize: 15,
                   ),
-                  prefixIcon: const Icon(Icons.search_rounded,
-                      color: Colors.white38, size: 22),
+                  prefixIcon: const Icon(
+                    Icons.search_rounded,
+                    color: Colors.white38,
+                    size: 22,
+                  ),
                   suffixIcon: ValueListenableBuilder<TextEditingValue>(
                     valueListenable: _controller,
                     builder: (context, value, child) {
                       return value.text.isNotEmpty
                           ? IconButton(
-                              icon: const Icon(Icons.close_rounded,
-                                  color: Colors.white38, size: 20),
+                              icon: const Icon(
+                                Icons.close_rounded,
+                                color: Colors.white38,
+                                size: 20,
+                              ),
                               onPressed: () {
                                 _controller.clear();
                                 context.read<SearchCubit>().clear();
@@ -135,16 +141,13 @@ class _SearchContentState extends State<_SearchContent> {
                 return state.when(
                   initial: () => const _InitialView(),
                   loading: () => const Center(
-                    child: CircularProgressIndicator(
-                        color: Color(0xFFE50914)),
+                    child: CircularProgressIndicator(color: Color(0xFFE50914)),
                   ),
                   loaded: (movies, tvShows) {
                     if (movies.isEmpty && tvShows.isEmpty) {
-                      return _EmptyResultsView(
-                          query: _controller.text);
+                      return _EmptyResultsView(query: _controller.text);
                     }
-                    return _ResultsList(
-                        movies: movies, tvShows: tvShows);
+                    return _ResultsList(movies: movies, tvShows: tvShows);
                   },
                   error: (message) => Center(
                     child: Padding(
@@ -153,7 +156,9 @@ class _SearchContentState extends State<_SearchContent> {
                         message,
                         textAlign: TextAlign.center,
                         style: const TextStyle(
-                            color: Colors.white54, fontSize: 14),
+                          color: Colors.white54,
+                          fontSize: 14,
+                        ),
                       ),
                     ),
                   ),
@@ -177,8 +182,11 @@ class _InitialView extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const Icon(Icons.movie_filter_rounded,
-              color: Colors.white12, size: 64),
+          const Icon(
+            Icons.movie_filter_rounded,
+            color: Colors.white12,
+            size: 64,
+          ),
           const SizedBox(height: 16),
           Text(
             'Busca tus películas y series favoritas',
@@ -205,8 +213,7 @@ class _EmptyResultsView extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const Icon(Icons.search_off_rounded,
-              color: Colors.white24, size: 48),
+          const Icon(Icons.search_off_rounded, color: Colors.white24, size: 48),
           const SizedBox(height: 16),
           Text(
             'Sin resultados para "$query"',
@@ -220,10 +227,7 @@ class _EmptyResultsView extends StatelessWidget {
 
 /// Scrollable list of results split by section.
 class _ResultsList extends StatelessWidget {
-  const _ResultsList({
-    required this.movies,
-    required this.tvShows,
-  });
+  const _ResultsList({required this.movies, required this.tvShows});
 
   final List<Movie> movies;
   final List<TvShow> tvShows;
@@ -234,22 +238,12 @@ class _ResultsList extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 16),
       children: [
         if (movies.isNotEmpty) ...[
-          _SectionHeader(
-            label: 'Películas',
-            count: movies.length,
-          ),
-          ...movies.map(
-            (movie) => _MovieListItem(movie: movie),
-          ),
+          _SectionHeader(label: 'Películas', count: movies.length),
+          ...movies.map((movie) => _MovieListItem(movie: movie)),
         ],
         if (tvShows.isNotEmpty) ...[
-          _SectionHeader(
-            label: 'Series',
-            count: tvShows.length,
-          ),
-          ...tvShows.map(
-            (tvShow) => _TvShowListItem(tvShow: tvShow),
-          ),
+          _SectionHeader(label: 'Series', count: tvShows.length),
+          ...tvShows.map((tvShow) => _TvShowListItem(tvShow: tvShow)),
         ],
         const SizedBox(height: 16),
       ],
@@ -259,10 +253,7 @@ class _ResultsList extends StatelessWidget {
 
 /// Section header with label and result count.
 class _SectionHeader extends StatelessWidget {
-  const _SectionHeader({
-    required this.label,
-    required this.count,
-  });
+  const _SectionHeader({required this.label, required this.count});
 
   final String label;
   final int count;
@@ -383,9 +374,7 @@ class _MediaListItem extends StatelessWidget {
         decoration: BoxDecoration(
           color: const Color(0xFF16213E),
           borderRadius: BorderRadius.circular(10),
-          border: Border.all(
-            color: Colors.white.withValues(alpha: 0.06),
-          ),
+          border: Border.all(color: Colors.white.withValues(alpha: 0.06)),
         ),
         child: Row(
           children: [
@@ -401,15 +390,18 @@ class _MediaListItem extends StatelessWidget {
                       ? CachedNetworkImage(
                           imageUrl: ApiConstants.imageUrl(posterPath),
                           fit: BoxFit.cover,
-                          placeholder: (_, __) => const ColoredBox(
-                              color: Color(0xFF0F3460)),
-                          errorWidget: (_, __, ___) => const ColoredBox(
-                              color: Color(0xFF0F3460)),
+                          placeholder: (_, __) =>
+                              const ColoredBox(color: Color(0xFF0F3460)),
+                          errorWidget: (_, __, ___) =>
+                              const ColoredBox(color: Color(0xFF0F3460)),
                         )
                       : const ColoredBox(
                           color: Color(0xFF0F3460),
-                          child: Icon(Icons.movie_outlined,
-                              color: Colors.white24, size: 20),
+                          child: Icon(
+                            Icons.movie_outlined,
+                            color: Colors.white24,
+                            size: 20,
+                          ),
                         ),
                 ),
               ),
@@ -449,8 +441,11 @@ class _MediaListItem extends StatelessWidget {
             Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                const Icon(Icons.star_rounded,
-                    color: Color(0xFFF5C518), size: 14),
+                const Icon(
+                  Icons.star_rounded,
+                  color: Color(0xFFF5C518),
+                  size: 14,
+                ),
                 const SizedBox(width: 3),
                 Text(
                   voteAverage.toStringAsFixed(1),

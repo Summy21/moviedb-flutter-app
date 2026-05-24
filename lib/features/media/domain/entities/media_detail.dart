@@ -74,19 +74,19 @@ class MediaDetail extends Equatable {
 
   @override
   List<Object?> get props => [
-        id,
-        title,
-        overview,
-        posterPath,
-        backdropPath,
-        voteAverage,
-        voteCount,
-        genres,
-        status,
-        tagline,
-        releaseDate,
-        runtime,
-        numberOfSeasons,
-        numberOfEpisodes,
-      ];
+    id,
+    title,
+    overview,
+    posterPath,
+    backdropPath,
+    voteAverage,
+    voteCount,
+    genres,
+    status,
+    tagline,
+    releaseDate,
+    runtime,
+    numberOfSeasons,
+    numberOfEpisodes,
+  ];
 }

@@ -12,9 +12,9 @@ class TvShowsCubit extends Cubit<TvShowsState> {
   TvShowsCubit({
     required GetPopularTvShows getPopularTvShows,
     required GetTopRatedTvShows getTopRatedTvShows,
-  })  : _getPopularTvShows = getPopularTvShows,
-        _getTopRatedTvShows = getTopRatedTvShows,
-        super(const TvShowsState.initial());
+  }) : _getPopularTvShows = getPopularTvShows,
+       _getTopRatedTvShows = getTopRatedTvShows,
+       super(const TvShowsState.initial());
 
   final GetPopularTvShows _getPopularTvShows;
   final GetTopRatedTvShows _getTopRatedTvShows;
