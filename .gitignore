@@ -46,3 +46,8 @@ app.*.map.json
 
 # Environment variables
 .env
+
+# FVM Version Cache
+.fvm/
+
+ios/Flutter/DartDefines.xcconfig

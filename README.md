@@ -89,10 +89,25 @@ lib/
 ## How to Run
 
 ### Requirements
-- Flutter 3.41.9 or higher
-- Dart 3.11.5 or higher
+- Flutter 3.44.0 or higher (recommended via FVM)
+- Dart 3.x or higher
 - Internet connection (TMDB API)
 - TMDB API Key — get yours free at [themoviedb.org](https://www.themoviedb.org/settings/api)
+
+### Recommended — using FVM (Flutter Version Manager)
+
+FVM ensures the correct Flutter version is used automatically.
+
+```bash
+# Install FVM
+dart pub global activate fvm
+
+# Install the project Flutter version
+fvm install 3.44.0
+
+# Use it in the project
+fvm use 3.44.0
+```
 
 ### Environment Setup
 
@@ -118,24 +133,35 @@ cd moviedb-flutter-app
 
 ```bash
 flutter pub get
+
+# or with FVM:
+fvm flutter pub get
 ```
 
 **3. Run code generator**
 
 ```bash
 flutter pub run build_runner build --delete-conflicting-outputs
+
+# or with FVM:
+fvm dart run build_runner build --delete-conflicting-outputs
 ```
 
 **4. Run the app**
 
-```bash
-flutter run --dart-define=TMDB_API_KEY=your_api_key_here
-```
-
-Or using the provided script:
+# or with FVM:
+fvm dart run build_runner build --delete-conflicting-outputs
 
 ```bash
 ./run.sh
+```
+
+Or manually:
+
+```bash
+flutter run --dart-define=TMDB_API_KEY=your_api_key_here
+# or with FVM:
+fvm flutter run --dart-define=TMDB_API_KEY=your_api_key_here
 ```
 
 ## Tests
@@ -150,6 +176,28 @@ flutter test
 
 ```bash
 flutter test --coverage
+```
+
+### Platform Support
+
+| Platform | Status | Notes |
+|---|---|---|
+| Android | Tested on physical device (API 33) | Fully functional |
+| iOS | Tested on simulator (iOS 26.4) | Requires Flutter 3.44.0 via FVM |
+| Web | Fully functional | Chrome |
+
+### Notes on iOS
+
+iOS requires Flutter 3.44.0 due to a compatibility issue between
+Flutter 3.41.9 stable and Xcode 26. The `run.sh` script handles
+this automatically when FVM is configured.
+
+The iOS project was regenerated cleanly:
+```bash
+rm -rf ios/
+flutter create . --platforms=ios
+flutter pub get
+cd ios && pod install && cd ..
 ```
 
 ### Test coverage
@@ -176,6 +224,9 @@ flutter test --coverage
 - [x] Hero animations between list and detail
 - [x] Unit tests — models and Cubits
 - [x] CI/CD pipeline with GitHub Actions
+- [x] Android — tested on physical device
+- [x] iOS — tested on simulator (Flutter 3.44.0 via FVM)
+- [x] Web — Chrome
 
 ---
 
@@ -227,10 +278,6 @@ matching the dark theme of the app.
 **Golden tests**
 Screenshot-based UI tests comparing rendered widgets
 against baseline images using the golden_toolkit package.
-
-**iOS CocoaPods sync**
-Pod installation configuration pending for iOS simulator.
-The app is fully functional on Android and Web.
 
 **CD pipeline — store publishing**
 With more time I would add Fastlane integration
