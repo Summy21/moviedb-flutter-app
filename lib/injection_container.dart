@@ -39,35 +39,35 @@ Future<void> initDependencies() async {
 
   /// Single Dio instance shared across all datasources.
   /// Pre-configured with base URL, API key, and timeouts.
-  sl.registerLazySingleton<Dio>(() => DioClient().dio);
+  sl.registerSingleton<Dio>(DioClient().dio);
 
   // ── 2. Data sources ───────────────────────────────────────────────────────
 
   /// Registered against the interface so the repository
   /// depends on the abstraction, not the concrete class.
-  sl.registerLazySingleton<IMediaDataSource>(() => TmdbDataSource(sl()));
+  sl.registerFactory<IMediaDataSource>(() => TmdbDataSource(sl()));
 
   // ── 3. Repositories ───────────────────────────────────────────────────────
 
   /// Registered against [IMediaRepository] — domain never
   /// knows that [MediaRepositoryImpl] exists.
-  sl.registerLazySingleton<IMediaRepository>(() => MediaRepositoryImpl(sl()));
+  sl.registerFactory<IMediaRepository>(() => MediaRepositoryImpl(sl()));
 
   // ── 4. Use cases ──────────────────────────────────────────────────────────
 
   // Movies
-  sl.registerLazySingleton(() => GetPopularMovies(sl()));
-  sl.registerLazySingleton(() => GetTopRatedMovies(sl()));
-  sl.registerLazySingleton(() => GetMovieDetail(sl()));
+  sl.registerFactory(() => GetPopularMovies(sl()));
+  sl.registerFactory(() => GetTopRatedMovies(sl()));
+  sl.registerFactory(() => GetMovieDetail(sl()));
 
   // TV Shows
-  sl.registerLazySingleton(() => GetPopularTvShows(sl()));
-  sl.registerLazySingleton(() => GetTopRatedTvShows(sl()));
-  sl.registerLazySingleton(() => GetTvShowDetail(sl()));
+  sl.registerFactory(() => GetPopularTvShows(sl()));
+  sl.registerFactory(() => GetTopRatedTvShows(sl()));
+  sl.registerFactory(() => GetTvShowDetail(sl()));
 
   // Search
-  sl.registerLazySingleton(() => SearchMovies(sl()));
-  sl.registerLazySingleton(() => SearchTvShows(sl()));
+  sl.registerFactory(() => SearchMovies(sl()));
+  sl.registerFactory(() => SearchTvShows(sl()));
 
   // ── 5. Cubits ─────────────────────────────────────────────────────────────
 
